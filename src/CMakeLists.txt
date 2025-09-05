@@ -59,13 +59,16 @@ set_target_properties(EvtGen PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${P
 set_target_properties(EvtGen PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 target_compile_definitions(EvtGen PUBLIC EVTGEN_CPP11)
 target_include_directories(EvtGen PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}> $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+#threebodydecays
 if(EVTGEN_HEPMC3)
     target_compile_definitions(EvtGen PUBLIC EVTGEN_HEPMC3)
     target_include_directories(EvtGen PUBLIC ${HEPMC3_INCLUDE_DIR})
-    target_link_libraries(EvtGen PUBLIC ${HEPMC3_LIB} ${HEPMC3_SEARCH_LIB})
+    #target_link_libraries(EvtGen PUBLIC ${HEPMC3_LIB} ${HEPMC3_SEARCH_LIB})
+    target_link_libraries(EvtGen PUBLIC ${HEPMC3_LIB} ${HEPMC3_SEARCH_LIB} ThreeBodyDecaysLib)
 else()
     target_include_directories(EvtGen PUBLIC ${HEPMC2_INCLUDE_DIR})
-    target_link_libraries(EvtGen PUBLIC ${HEPMC2_LIBRARIES})
+    #target_link_libraries(EvtGen PUBLIC ${HEPMC2_LIBRARIES})
+    target_link_libraries(EvtGen PUBLIC ${HEPMC2_LIBRARIES} ThreeBodyDecaysLib)
 endif()
 
 # Now make the static library from the object files
@@ -74,13 +77,16 @@ set_target_properties(EvtGenStatic PROPERTIES OUTPUT_NAME EvtGen)
 set_target_properties(EvtGenStatic PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 target_compile_definitions(EvtGenStatic PUBLIC EVTGEN_CPP11)
 target_include_directories(EvtGenStatic PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}> $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+#threebodydecays
 if(EVTGEN_HEPMC3)
     target_compile_definitions(EvtGenStatic PUBLIC EVTGEN_HEPMC3)
     target_include_directories(EvtGenStatic PUBLIC ${HEPMC3_INCLUDE_DIR})
-    target_link_libraries(EvtGenStatic PUBLIC ${HEPMC3_LIB} ${HEPMC3_SEARCH_LIB})
+    #target_link_libraries(EvtGenStatic PUBLIC ${HEPMC3_LIB} ${HEPMC3_SEARCH_LIB})
+    target_link_libraries(EvtGenStatic PUBLIC ${HEPMC3_LIB} ${HEPMC3_SEARCH_LIB} ThreeBodyDecaysLib)
 else()
     target_include_directories(EvtGenStatic PUBLIC ${HEPMC2_INCLUDE_DIR})
-    target_link_libraries(EvtGenStatic PUBLIC ${HEPMC2_LIBRARIES})
+    #target_link_libraries(EvtGenStatic PUBLIC ${HEPMC2_LIBRARIES})
+    target_link_libraries(EvtGenStatic PUBLIC ${HEPMC2_LIBRARIES} ThreeBodyDecaysLib)
 endif()
 
 
@@ -248,7 +254,9 @@ endif()
 
 # Install the libraries
 install(
-    TARGETS EvtGen EvtGenStatic
+    #threebodydecays
+    #    TARGETS EvtGen EvtGenStatic 
+    TARGETS EvtGen EvtGenStatic ThreeBodyDecaysLib
     EXPORT "EvtGenTargets"
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

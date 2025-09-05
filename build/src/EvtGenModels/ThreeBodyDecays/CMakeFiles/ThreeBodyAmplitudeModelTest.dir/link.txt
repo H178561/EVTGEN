@@ -1,0 +1,1 @@
+/usr/bin/c++  -fsigned-char -Wall -Wextra -O3 -DNDEBUG CMakeFiles/ThreeBodyAmplitudeModelTest.dir/Tests/ThreeBodyAmplitudeModelTest.cpp.o -o ThreeBodyAmplitudeModelTest  libThreeBodyDecaysLib.a /usr/lib/x86_64-linux-gnu/libgtest.a 

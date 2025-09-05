@@ -39,18 +39,20 @@ cmake_minimum_required(VERSION 3.11.0)
 # Project setup
 if(${CMAKE_VERSION} VERSION_LESS 3.12.0)
     project(EvtGen
-        VERSION 2.2.0
+        VERSION 2.2.3
         DESCRIPTION "Monte Carlo generator of particle decays, in particular the weak decays of heavy flavour particles such as B mesons."
         LANGUAGES C CXX
         )
 else()
     project(EvtGen
-        VERSION 2.2.0
+        VERSION 2.2.3
         DESCRIPTION "Monte Carlo generator of particle decays, in particular the weak decays of heavy flavour particles such as B mesons."
         LANGUAGES C CXX
         HOMEPAGE_URL "https://evtgen.hepforge.org"
         )
 endif()
+
+message(STATUS "HEPMC3_DIR is set to: ${HEPMC3_DIR}")
 
 # Prepend this project's custom module path(s) to CMAKE_MODULE_PATH
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/Modules ${CMAKE_MODULE_PATH})
@@ -85,8 +87,23 @@ message(STATUS "EvtGen: Optional auto-fixes by clang-tidy checks  EVTGEN_CLANG_T
 message(STATUS "EvtGen: Optional list of clang-tidy checks to run EVTGEN_CLANG_TIDY_CHECKS ${EVTGEN_CLANG_TIDY_CHECKS}")
 include(EvtGenSetupClangTidyChecks)
 
+# Finden Sie ROOT-Pakete
+find_package(ROOT REQUIRED)
+
+# Setzen Sie die Include-Verzeichnisse und Bibliotheken
+include_directories(${ROOT_INCLUDE_DIRS})
+link_directories(${ROOT_LIBRARY_DIRS})
+add_definitions(${ROOT_CXX_FLAGS})
+
+#add ThreeBodyDecays to the list of models
+add_subdirectory(src/EvtGenModels/ThreeBodyDecays)
+
 # Now build the library
 add_subdirectory(src)
+
+target_include_directories(EvtGen PRIVATE 
+    ${CMAKE_SOURCE_DIR}/src/EvtGenModels/ThreeBodyDecays/include
+)
 
 # Copy the particle property and decay tables
 configure_file(DECAY.DEC ${CMAKE_CURRENT_BINARY_DIR}/DECAY.DEC COPYONLY)
@@ -119,6 +136,8 @@ endif()
 if(EVTGEN_BUILD_VALIDATIONS)
     add_subdirectory(validation)
 endif()
+
+
 
 # Install the include directories
 install(DIRECTORY EvtGen         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

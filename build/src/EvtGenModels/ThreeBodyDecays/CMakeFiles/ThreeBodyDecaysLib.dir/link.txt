@@ -1,0 +1,2 @@
+/usr/bin/ar qc libThreeBodyDecaysLib.a CMakeFiles/ThreeBodyDecaysLib.dir/src/ThreeBodyDecays.cpp.o CMakeFiles/ThreeBodyDecaysLib.dir/src/OrientationAngles.cpp.o CMakeFiles/ThreeBodyDecaysLib.dir/src/ThreeBodyAmplitudeModel.cpp.o CMakeFiles/ThreeBodyDecaysLib.dir/src/ClebschGordan.cpp.o CMakeFiles/ThreeBodyDecaysLib.dir/src/FormFactors.cpp.o CMakeFiles/ThreeBodyDecaysLib.dir/src/WignerFunctions.cpp.o CMakeFiles/ThreeBodyDecaysLib.dir/src/SpinParity.cpp.o CMakeFiles/ThreeBodyDecaysLib.dir/src/WignerRotation.cpp.o
+/usr/bin/ranlib libThreeBodyDecaysLib.a
