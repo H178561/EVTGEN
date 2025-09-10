@@ -1,30 +1,5 @@
 # EvtGen README
 
-## EvtThreeBodyDecays
-
-This is a fork of EvtGen containing the EvtThreeBodyDecays Decay Model which uses the [ThreeBodyDecays](https://github.com/H178561/ThreeBodyDecays) C++ Model to calculate the amplitude of a model defined in the json file format from the [amplitude serialization project](https://rub-ep1.github.io/amplitude-serialization/).
-
-To build EvtGen with the ThreeBodyDecays project one has to link the C++ project to the src/EvtGenModels folder like
-```
-ln -s /home/usr/ThreeBodyDecays/ /home/usr/EvtGen/src/EvtGenModels
-```
-
-
-How to use:
-
-```
-Decay Lambda_c+
-    1.00  p+ pi+ K- THREEBODYDECAYS lc2ppik-lhcb-2683025.json;
-Enddecay
-CDecay anti-Lambda_c-
-
-End
-```
-
-
-
-## From the EvtGen README
-
 ## Building the code
 To simplify the procedure you can use the setupEvtGen.sh script, which
 automates the process of downloading and building EvtGen and all dependencies
