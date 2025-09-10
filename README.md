@@ -23,7 +23,7 @@ End
 
 
 
-#From the EvtGen README
+# From the EvtGen README
 
 ## Building the code
 To simplify the procedure you can use the setupEvtGen.sh script, which
